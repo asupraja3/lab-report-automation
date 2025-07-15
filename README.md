@@ -1,2 +1,5 @@
 # lab_report_automation
-Lab Report Automation is a Python-based automation tool for generating diagnostic summaries from medical datasets. It creates visual insights, compiles reports as PDFs, and sends them via email. Ideal for streamlining lab data analysis and reporting workflows.
+This project automates CKD diagnostics from lab data by using Python, machine learning, and email automation. It includes prediction, anomaly alerts, visualization, and secure report sharing.
+
+
+
