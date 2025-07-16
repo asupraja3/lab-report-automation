@@ -1,5 +1,8 @@
-# lab_report_automation
-This project automates CKD diagnostics from lab data by using Python, machine learning, and email automation. It includes prediction, anomaly alerts, visualization, and secure report sharing.
+# Lab Report Automation
+This project automates the analysis and reporting of kidney disease lab data using Python. It includes data cleaning, visualization, CKD risk summarization, PDF report generation, and email alerts.
 
-
-
+## Features
+- CKD prediction and anomaly detection
+- Visual trend reporting
+- PDF report generation
+- Email automation
