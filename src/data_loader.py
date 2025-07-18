@@ -9,11 +9,11 @@ def load_and_clean_data(filepath):
 
     # Fill numeric missing values with median
     for col in df.select_dtypes(include='number').columns:
-        df[col].fillna(df[col].median(), inplace=True)
+        df[col] = df[col].fillna(df[col].median())
 
     # Fill categorical with mode
     for col in df.select_dtypes(include='object').columns:
-        df[col].fillna(df[col].mode()[0], inplace=True)
+        df[col] = df[col].fillna(df[col].mode()[0])
 
     # Convert target variable
     df['classification'] = df['classification'].replace({'ckd': 1, 'notckd': 0})
@@ -22,6 +22,7 @@ def load_and_clean_data(filepath):
     label_encoders = {}
     for col in df.select_dtypes(include='object').columns:
         le = LabelEncoder()
+        df[col] = df[col].astype(str)
         df[col] = le.fit_transform(df[col])
         label_encoders[col] = le
 

@@ -4,7 +4,7 @@ from src.email_sender import send_email_report
 
 
 def main():
-    filepath = "data/kidney_disease.csv"
+    filepath = r"D:\Work_USA\Projects\lab-report-automation\data\kidney_disease.csv"
     df, _ = load_and_clean_data(filepath)
 
     img_path = generate_visuals(df)
@@ -14,10 +14,9 @@ def main():
     send_email_report(
         subject="Automated CKD Lab Report",
         body="Please find attached the latest diagnostic report.",
-        to_email="doctor@example.com",
+        to_email="asupraja527@gmail.com",
         attachment_path=pdf_path
     )
-
 
 if __name__ == "__main__":
     main()

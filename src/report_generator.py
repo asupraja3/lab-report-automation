@@ -3,7 +3,7 @@ import seaborn as sns
 import os
 from fpdf import FPDF
 
-def generate_visuals(df, out_dir="visualizations"):
+def generate_visuals(df, out_dir=r"D:\Work_USA\Projects\lab-report-automation\src\visualizations"):
     os.makedirs(out_dir, exist_ok=True)
     plot_path = os.path.join(out_dir, "age_vs_creatinine.png")
     plt.figure(figsize=(8,5))
@@ -23,7 +23,7 @@ CKD Patient Summary:
 - Avg Serum Creatinine: {avg_creatinine:.2f} mg/dL
 """
 
-def create_pdf_report(summary_text, image_path, output_path="reports/lab_report.pdf"):
+def create_pdf_report(summary_text, image_path, output_path=r"D:\Work_USA\Projects\lab-report-automation\src\reports/lab_report.pdf"):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
