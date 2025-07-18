@@ -12,7 +12,7 @@ def main():
     pdf_path = create_pdf_report(summary, img_path)
 
     send_email_report(
-        subject="Automated CKD Lab Report",
+        subject="Hi Praveen, Automated CKD Lab Report",
         body="Please find attached the latest diagnostic report.",
         to_email="asupraja527@gmail.com",
         attachment_path=pdf_path
