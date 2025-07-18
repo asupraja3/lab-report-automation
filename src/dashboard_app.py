@@ -5,7 +5,7 @@ from report_generator import generate_visuals, generate_summary, create_pdf_repo
 from email_sender import send_email_report
 
 st.set_page_config(layout="wide")
-st.title("🧪 Kidney Lab Report Automation Dashboard")
+st.title("Kidney Lab Report Automation Dashboard")
 
 # File upload
 uploaded_file = st.file_uploader("Upload CSV Lab Report File", type=["csv"])
@@ -13,7 +13,7 @@ uploaded_file = st.file_uploader("Upload CSV Lab Report File", type=["csv"])
 if uploaded_file:
     with st.spinner("Processing file..."):
         # Save uploaded file to data dir
-        file_path = f"D:\Work_USA\Projects\lab-report-automation\data/{uploaded_file.name}"
+        file_path = fr"D:\Work_USA\Projects\lab-report-automation\data/{uploaded_file.name}"
         with open(file_path, "wb") as f:
             f.write(uploaded_file.read())
 
@@ -25,8 +25,16 @@ if uploaded_file:
         st.dataframe(df.head(10), use_container_width=True)
 
         # Generate and display visual
+        st.subheader("Select age range for visualization")
+        age_bins = [0,10,20,30,40,50,60,70,80,90,100]
+        age_labels = [f"{age_bins[i]}-{age_bins[i+1]}" for i in range(len(age_bins)-1)]
+        selected_age_range = st.selectbox("Select the range", age_labels)
+
+        age_low, age_high = map(int, selected_age_range.split('-'))
+        filtered_df = df[(df['age'] >= age_low) & (df['age'] <= age_high)]
+
         st.subheader("📈 Age vs Serum Creatinine")
-        visual_path = generate_visuals(df)
+        visual_path = generate_visuals(filtered_df)
         st.image(visual_path)
 
         # Show summary
