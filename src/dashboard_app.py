@@ -3,6 +3,8 @@ import pandas as pd
 from data_loader import load_and_clean_data
 from report_generator import generate_visuals, generate_summary, create_pdf_report
 from email_sender import send_email_report
+import joblib
+
 
 st.set_page_config(layout="wide")
 st.title("Kidney Lab Report Automation Dashboard")
@@ -19,6 +21,8 @@ if uploaded_file:
 
         # Load and process data
         df, _ = load_and_clean_data(file_path)
+
+        model = joblib.load("D:\Work_USA\Projects\lab-report-automation\src\ckd_model.pkl")
 
         # Show dataframe preview
         st.subheader("🔍 Lab Data Preview")
@@ -37,6 +41,21 @@ if uploaded_file:
         visual_path = generate_visuals(filtered_df)
         st.image(visual_path)
 
+        # Predict CKD risk
+        X = filtered_df.drop(columns=['classification'], errors='ignore')
+        # Drop 'id' if it exists, to match training features
+        if 'id' in X.columns:
+            X = X.drop(columns=['id'])
+        filtered_df['CKD_Risk_Prediction'] = model.predict(X)
+
+        # Optionally add probability
+        proba = model.predict_proba(X)[:, 1]
+        filtered_df['Risk_Score (%)'] = (proba * 100).round(2)
+
+        # Display predictions
+        st.subheader("🧠 CKD Risk Predictions")
+        st.dataframe(filtered_df[['age', 'sc', 'bp', 'CKD_Risk_Prediction', 'Risk_Score (%)']],
+                     use_container_width=True)
         # Show summary
         st.subheader("📝 Summary")
         summary_text = generate_summary(df)
