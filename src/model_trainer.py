@@ -13,14 +13,17 @@ def train_and_save_model(data_path=r"D:\Work_USA\Projects\lab-report-automation\
     if 'id' in df.columns:
         df = df.drop(columns=['id'])
 
+    # Ensure 'classification' is the target variable
     X = df.drop('classification', axis=1)
     y = df['classification']
-
+# Split data into training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+    # Train Random Forest model
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
 
+# Evaluate model
     preds = model.predict(X_test)
     print(classification_report(y_test, preds))
 
