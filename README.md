@@ -13,3 +13,11 @@ This project automates the analysis and reporting of kidney disease lab data usi
 - Visualize CKD patterns (e.g., Age vs Creatinine)
 - Generate PDF summary reports
 - Email reports directly from the dashboard
+
+### Tech Stack 🛠️
+
+* **Environment:** `Python 3.x`
+* **Data Processing:** `panda`, `numpy`
+* **ML:** `scikit-learn`
+* **Data Sources:** `CSV`
+* **Dashboard:** `Streamlit`
